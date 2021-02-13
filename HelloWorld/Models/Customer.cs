@@ -12,7 +12,7 @@ namespace HelloWorld.Models {
 		public List<Order> Orders { get; set; }
 
 		// METHODS
-		public Customer(string firstName, string lastName, string email) {
+		private Customer(string firstName, string lastName, string email) {
 			this.CustomerID = Guid.NewGuid().ToString();
 			this.FirstName = firstName;
 			this.LastName = lastName;
@@ -23,6 +23,14 @@ namespace HelloWorld.Models {
 			return $"Customer ID: {this.CustomerID} \n" +
 				   $"Name: {this.FirstName} {this.LastName} \n" +
 				   $"Email: {this.Email} \n";
+		}
+
+		public static Customer CreateCustomer(string firstName, string lastName, string email) {
+			Customer customer = new Customer(firstName, lastName, email);
+
+			// Fancy validations go here.
+
+			return customer;
 		}
 	}
 }

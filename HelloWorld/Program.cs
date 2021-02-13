@@ -7,10 +7,14 @@ using System.Linq;
 namespace HelloWorld {
 	class Program {
 		static void Main(string[] args) {
-			Product product = new Product("Bike", 300);
-			product.ShippingMethod = ShippingMethod.Air;
+			Customer customer = Customer.CreateCustomer("John", "Smith", "john@smith.com");
+			Product product = Product.CreateProduct(99.99, "Bike");
+			Product anotherProduct = Product.CreateProduct(999.99, "Guitar");
 
-			Console.WriteLine(product);
+			Order order = Order.CreateOrder(customer, product, 2);
+			order.AddProduct(anotherProduct, 1);
+
+			Console.WriteLine(order);
 		}
 	}
 }

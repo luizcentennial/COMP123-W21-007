@@ -29,7 +29,7 @@ namespace HelloWorld.Models {
 		public ShippingMethod ShippingMethod { get; set; }
 
 		// METHODS
-		public Product(string description, double price) {
+		private Product(string description, double price) {
 			this.ProductID = Guid.NewGuid().ToString();
 			this.Description = description;
 			this.Price = price;
@@ -40,6 +40,14 @@ namespace HelloWorld.Models {
 				   $"Description: {this.Description} \n" +
 				   $"Price: {this.Price:C} \n" +
 				   $"Shipping Method: {this.ShippingMethod}";
+		}
+
+		public static Product CreateProduct(double price, string description) {
+			var product = new Product(description, price);
+
+			// Some fancy business logic here.
+
+			return product;
 		}
 	}
 }
