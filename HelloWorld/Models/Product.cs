@@ -8,7 +8,7 @@ namespace HelloWorld.Models {
 		private int stock;
 
 		// PROPERTIES
-		public string ProductID { get; private set; }
+		public string ProductID { get; set; }
 		public string Description { get; set; }
 		public double Price { get; set; }
 		public int Stock { 
@@ -29,6 +29,10 @@ namespace HelloWorld.Models {
 		public ShippingMethod ShippingMethod { get; set; }
 
 		// METHODS
+		public Product() {
+			this.ProductID = Guid.NewGuid().ToString();
+		}
+
 		private Product(string description, double price) {
 			this.ProductID = Guid.NewGuid().ToString();
 			this.Description = description;

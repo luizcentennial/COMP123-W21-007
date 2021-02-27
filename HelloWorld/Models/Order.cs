@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace HelloWorld.Models {
 	public class Order {
@@ -46,6 +48,34 @@ namespace HelloWorld.Models {
 			return $"Order ID: {this.OrderID} \n" +
 				   $"Customer: {this.Customer.FirstName} {this.Customer.LastName} \n" +
 				   $"Total: {this.Total:C}";
+		}
+
+		public void SaveOrder(string directory) {
+			directory.Replace('/', '\\');
+
+			if (!directory.EndsWith('\\'))
+				directory += "\\";
+
+			if (!Directory.Exists(directory))
+				throw new Exception($"Directory {directory} was specified, but does not exist.");
+
+			var serializer = new XmlSerializer(typeof(Order));
+			string filename = $"Order_{this.OrderID}.xml";
+
+			using (var stream = new FileStream(directory + filename, FileMode.Create)) {
+				serializer.Serialize(stream, this);
+			}
+		}
+
+		public static Order LoadOrder(string file) {
+			var serializer = new XmlSerializer(typeof(Order));
+			Order order = null;
+
+			using (var stream = new FileStream(file, FileMode.Open)) {
+				order = (Order)serializer.Deserialize(stream);
+			}
+
+			return order;
 		}
 	}
 }
