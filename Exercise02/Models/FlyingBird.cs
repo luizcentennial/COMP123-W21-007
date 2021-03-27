@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Exercise02.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Exercise02.Models {
-	public class FlyingBird : Bird {
+	public class FlyingBird : Bird, IFlyingBird {
 		public double Speed { get; set; }
 
 		public void Fly() {

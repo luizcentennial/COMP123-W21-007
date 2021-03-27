@@ -17,5 +17,10 @@ namespace Exercise02.Models {
 
 		public abstract void Sleep();
 
+		public override string ToString() {
+			return $"Bird ID: {this.BirdID} \n" +
+				   $"Color: {this.Color} \n" +
+				   $"Species: {this.Species}";
+		}
 	}
 }
